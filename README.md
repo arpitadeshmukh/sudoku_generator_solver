@@ -99,12 +99,6 @@ This project was developed by [Arpita Deshmukh](https://github.com/arpitadeshmuk
 
 ---
 
-## 📜 License
-
-This project is licensed under the MIT License.
-
----
-
 > For suggestions or issues, feel free to open an [Issue](https://github.com/arpitadeshmukh/sudoku_generator_solver/issues).
 
 Enjoy Sudoku-ing 🧩🎉!
