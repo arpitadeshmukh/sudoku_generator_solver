@@ -47,19 +47,6 @@ This project features a fully functional **Sudoku Generator and Solver**, with b
 
 ---
 
-## 📂 Folder Structure
-
-```
-├── index.html      # Main entry point
-├── style.css       # Theme and layout styling
-├── sudoku.js       # Game logic and interactivity
-├── main.cpp        # Core C++ code
-├── README.md
-
-```
-
----
-
 ## 🛠️ Run Locally
 
 ### Web Version
