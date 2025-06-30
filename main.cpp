@@ -17,11 +17,6 @@ const int HARD = 56;
 vector<vector<int>> board(N, vector<int>(N, 0));    // Sudoku grid
 vector<vector<int>> solution(N, vector<int>(N, 0)); // To store the found solution
 
-
-// extern "C" {
-//     void generate_sudoku(int* buffer, int difficulty);
-// }
-
 class Generator
 {
 public:
@@ -418,66 +413,3 @@ int main()
     }
     return 0;
 }
-
-
-
-extern "C" {
-    void generate_sudoku(int* buffer, int difficulty) {
-        Generator g;
-
-        if (difficulty == 1)
-            g.removeNumbers(EASY);
-        else if (difficulty == 2)
-            g.removeNumbers(MEDIUM);
-        else
-            g.removeNumbers(HARD);
-
-        int index = 0;
-        for (int i = 0; i < N; i++) {
-            for (int j = 0; j < N; j++) {
-                buffer[index++] = board[i][j];
-            }
-        }
-    }
-}
-
-// // New main()
-// int main(int argc, char* argv[]) {
-//     int difficulty_level = 1;
-
-//     if (argc >= 2 && string(argv[1]) == "solve") {
-//         string input = argv[2];
-//         int idx = 0;
-//         for (int i = 0; i < N; i++)
-//             for (int j = 0; j < N; j++)
-//                 board[i][j] = input[idx++] - '0';
-
-//         Solver solver;
-//         vector<vector<vector<int>>> domains(N, vector<vector<int>>(N));
-//         if (solver.solveSudoku(board, domains)) {
-//             for (auto& row : board)
-//                 for (int val : row)
-//                     cout << val;
-//         } else {
-//             cerr << "No solution\n";
-//         }
-//         return 0;
-//     }
-
-//     // generation logic continues as before...
-
-//     if (argc > 1)
-//         difficulty_level = atoi(argv[1]);
-
-//     Generator puzzle;
-//     if (difficulty_level == 1) puzzle.removeNumbers(EASY);
-//     else if (difficulty_level == 2) puzzle.removeNumbers(MEDIUM);
-//     else puzzle.removeNumbers(HARD);
-
-//     // Print the board as a single line of 81 digits
-//     for (auto& row : board)
-//         for (int val : row)
-//             cout << val;
-    
-//     return 0;
-// }
