@@ -217,123 +217,6 @@ function handleInput(event, row, col) {
     
 }
 
-
-
-// Display the solution when the stop button is clicked
-// document.getElementById('stopButton').addEventListener('click', () => {
-//     const solutionGrid = document.getElementById('solutionGrid');
-//     solutionGrid.innerHTML = ''; // Clear any previous solution
-
-//     for (let row = 0; row < N; row++) {
-//         for (let col = 0; col < N; col++) {
-//             const cell = document.createElement('input');
-//             cell.type = 'text';
-//             cell.value = solution[row][col];
-//             cell.readOnly = true;
-//             solutionGrid.appendChild(cell);
-//         }
-//     }
-// });
-
-// document.getElementById('stopButton').addEventListener('click', () => {
-//     const inputs = document.querySelectorAll("#sudokuGrid input");
-
-//     inputs.forEach((cell, index) => {
-//         const row = Math.floor(index / N);
-//         const col = index % N;
-//         cell.value = solution[row][col]; // Fill with correct value
-//         cell.readOnly = true; // Lock the cell
-//         cell.classList.add("solved-cell"); // Optional styling
-//     });
-
-//     gameOver = true;
-//     clearInterval(timerInterval); // Stop timer
-// });
-
-// document.getElementById('stopButton').addEventListener('click', () => {
-//     const inputs = document.querySelectorAll("#sudokuGrid input");
-
-//     inputs.forEach((cell, index) => {
-//         const row = Math.floor(index / N);
-//         const col = index % N;
-
-//         cell.value = solution[row][col];       // Fill correct value
-//         cell.readOnly = true;                  // Disable editing
-//         cell.classList.remove("invalid", "hinted", "valid"); // Cleanup
-//         cell.classList.add("solved-cell");     // Add styling
-//     });
-
-//     gameOver = true;
-//     clearInterval(timerInterval);
-// });
-
-
-// document.getElementById('stopButton').addEventListener('click', () => {
-//     const stopButton = document.getElementById('stopButton');
-//     const inputs = document.querySelectorAll("#sudokuGrid input");
-
-//     inputs.forEach((cell, index) => {
-//         const row = Math.floor(index / N);
-//         const col = index % N;
-
-//         cell.value = solution[row][col];
-//         cell.readOnly = true;
-//         cell.classList.remove("invalid", "hinted", "valid");
-//         cell.classList.add("solved-cell");
-//     });
-
-//     gameOver = true;
-//     clearInterval(timerInterval);
-
-//     // 🎮 Change "Show Solution" to "New Game"
-//     stopButton.textContent = "New Game";
-//     stopButton.classList.add("new-game-style");
-//     stopButton.removeEventListener('click', showSolutionHandler); // optional cleanup
-//     stopButton.addEventListener('click', () => {
-//         startNewGame();
-//     }, { once: true }); // one-time listener
-// });
-
-// // Optionally separate logic
-// function showSolutionHandler() {
-//     // moved here if you want to detach later
-// }
-
-
-// function showSolutionHandler() {
-//     const stopButton = document.getElementById('stopButton');
-//     const inputs = document.querySelectorAll("#sudokuGrid input");
-
-//     inputs.forEach((cell, index) => {
-//         const row = Math.floor(index / N);
-//         const col = index % N;
-
-//         cell.value = solution[row][col];
-//         cell.readOnly = true;
-//         cell.classList.remove("invalid", "hinted", "valid");
-//         cell.classList.add("solved-cell");
-//     });
-
-//     gameOver = true;
-//     clearInterval(timerInterval);
-
-//     // Update button to say "New Game"
-//     stopButton.textContent = "New Game";
-//     stopButton.classList.add("new-game-style");
-
-//     // Remove all previous click handlers
-//     const newButton = stopButton.cloneNode(true);
-//     stopButton.parentNode.replaceChild(newButton, stopButton);
-
-//     // Now reattach as New Game
-//     newButton.addEventListener('click', () => {
-//         startNewGame();
-//     }, { once: true });
-// }
-
-// document.getElementById('stopButton').addEventListener('click', showSolutionHandler);
-
-
 function showSolutionHandler() {
     const stopButton = document.getElementById('stopButton');
     const inputs = document.querySelectorAll("#sudokuGrid input");
@@ -376,17 +259,11 @@ document.getElementById('stopButton').addEventListener('click', () => {
         document.querySelectorAll(".difficulty-buttons button").forEach(btn =>
             btn.classList.remove("selected")
         );
-        
-
         // Reset UI state
         resetStopButton();
         clearInterval(timerInterval);
     }
 });
-
-
-
-
 
 
 function startNewGame() {
@@ -405,9 +282,6 @@ function startNewGame() {
     gameOver = false;
     updateLivesDisplay();
     startTimer();
-
-    // document.getElementById("stopButton").textContent = "Show Solution";
-    // document.getElementById("stopButton").classList.remove("new-game-style");
     resetStopButton();  // <-- important!
 
 }
@@ -491,10 +365,6 @@ function createParticlesContainer() {
 }
 
 
-
-// Event listener to reset grid on difficulty change
-// document.getElementById('difficultyLevel').addEventListener('change', startNewGame);
-
 document.getElementById("retryButton").addEventListener("click", () => {
     hideGameOverPopup();
     retryGame(); // ⬅️ use retry logic
@@ -529,7 +399,6 @@ document.querySelectorAll(".difficulty-buttons button").forEach(button => {
     });
 });
 
-
 document.getElementById("startButton").addEventListener("click", () => {
     if (!selectedDifficulty) {
         alert("Please select a difficulty first!");
@@ -550,11 +419,6 @@ document.getElementById("startButton").addEventListener("click", () => {
 
     startNewGame();
 });
-
-  
-// window.addEventListener("DOMContentLoaded", () => {
-//     loadParticles("#ffffff"); // or any color depending on theme
-// });
 
 document.getElementById("hintButton").addEventListener("click", () => {
     if (remainingHints === 0) {
