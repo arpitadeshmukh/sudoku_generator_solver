@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sudoku Game</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+    <div id="particles-js"></div>
+
+      <!-- 🏠 Home Screen -->
+    <div id="homeScreen" class="screen">
+        <div class="home-content">
+        <h1>🧩 Sudoku Challenge</h1>
+
+
+        <p>Select difficulty to begin:</p>
+        <div class="difficulty-buttons">
+            <button data-difficulty="1">Easy</button>
+            <button data-difficulty="2">Medium</button>
+            <button data-difficulty="3">Hard</button>
+        </div>
+        <p id="selectedDifficultyText" style="margin-top: 10px; font-weight: bold;"></p>
+        <button id="startButton">Start Game</button>
+        </div>
+
+        <style>
+          #particles-js {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            width: 100%;
+            height: 100%;
+          }
+        
+          body.light #particles-js canvas {
+            background: #ffffff;
+          }
+        
+          body:not(.light) #particles-js canvas {
+            background: #000000;
+          }
+        </style>
+    </div>
+
+    <div id="gameScreen" class="screen hidden">
+        <h1>Sudoku Generator</h1>
+        <div id="gameOverPopup" class="popup hidden">
+            <div class="popup-content">
+                <h2>💀 Game Over!</h2>
+                <p>You're out of lives.</p>
+                <button id="retryButton">🔁 Retry</button>
+                <button id="newGameButton">🎮 New Game</button>
+            </div>
+        </div>
+        <div id="winPopup" class="popup hidden">
+            <div class="popup-content">
+                <h2>🎉 You Solved It!</h2>
+                <p>Well done!</p>
+                <button id="newGameWinButton">🎮 Start New Game</button>
+            </div>
+        </div>
+        
+        <div class="theme-toggle">
+            <label class="switch">
+                <input type="checkbox" id="themeSwitch">
+                <span class="slider round"></span>
+            </label>
+            <span id="themeLabel">🌙 Dark</span>
+        </div>
+        <div class="selected-difficulty">
+    🎯 Difficulty: <span id="difficultyDisplay"></span>
+</div>
+
+
+        <div class="info-container">
+            <div class="info-box">
+              ❤️ Lives: <span id="livesCount">3</span>
+            </div>
+            <div class="info-box">
+              ⏱ Time: <span id="timer">00:00</span>
+            </div>
+        </div>
+          
+        
+
+        <div class="board-section">
+            <h2>Puzzle</h2>
+            <div id="sudokuGrid" class="grid"></div>
+        </div>
+
+        <div class="button-row">
+            <button id="hintButton" class="hint-btn">Hint (3 left)</button>
+            <button id="stopButton">Show Solution</button>
+          </div>
+
+    </div>
+
+    <script src="sudoku.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  
+
+  <script>
+    function loadParticles(color) {
+      const container = document.getElementById("particles-js");
+      if (!container) return;
+  
+      // Destroy old instance
+      if (window.pJSDom && window.pJSDom.length > 0) {
+        window.pJSDom[0].pJS.fn.vendors.destroypJS();
+        window.pJSDom = [];
+      }
+  
+      particlesJS("particles-js", {
+        particles: {
+          number: { value: 60 },
+          color: { value: color },
+          shape: { type: "circle" },
+          opacity: { value: 0.6 },
+          size: { value: 3 },
+          line_linked: {
+            enable: true,
+            distance: 150,
+            color: color,
+            opacity: 0.4,
+            width: 1
+          },
+          move: {
+            enable: true,
+            speed: 2
+          }
+        },
+        interactivity: {
+          detect_on: "window",
+          events: {
+            onhover: { enable: true, mode: "grab" },
+            onclick: { enable: true, mode: "push" }
+          },
+          modes: {
+            grab: { distance: 140, line_linked: { opacity: 1 } },
+            push: { particles_nb: 4 }
+          }
+        },
+        retina_detect: true
+      });
+    }
+  
+    document.addEventListener("DOMContentLoaded", () => {
+    const themeSwitch = document.getElementById("themeSwitch");
+    const themeLabel = document.getElementById("themeLabel");
+
+    const currentTheme = localStorage.getItem("theme") || "dark";
+    const isLight = currentTheme === "light";
+
+    // Apply initial theme
+    document.body.classList.toggle("light", isLight);
+
+    // Load particles based on theme
+    loadParticles(isLight ? "#000000" : "#ffffff");
+
+    // Update theme switch UI
+    if (themeSwitch && themeLabel) {
+      themeSwitch.checked = isLight;
+      themeLabel.textContent = isLight ? "🌞 Light" : "🌙 Dark";
+
+      themeSwitch.addEventListener("change", () => {
+        const isLight = themeSwitch.checked;
+        document.body.classList.toggle("light", isLight);
+        localStorage.setItem("theme", isLight ? "light" : "dark");
+        themeLabel.textContent = isLight ? "🌞 Light" : "🌙 Dark";
+
+        // Reload particles with new color
+        loadParticles(isLight ? "#000000" : "#ffffff");
+      });
+    }
+    // Initialize the game
+    initGame();
+  });
+  </script>
+</script>
+</body>
+</html>
+
+
+    
